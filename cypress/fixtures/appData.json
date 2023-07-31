@@ -1,0 +1,15 @@
+{
+    "LoginPage":{
+        "url" : "https://dashboard.uniblock.dev/auth/login",
+        "title": "Login | Uniblock Dashboard",
+        "validCredentials": {
+            "email": "renzdesierra08@gmail.com",
+            "password": "Desierrafamily0"
+        }
+    },
+    "Dashboard": {
+        "url": "https://dashboard.uniblock.dev/dashboard/projects/list",
+        "title": "Projects: List | Uniblock Dashboard"
+
+    }
+}
