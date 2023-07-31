@@ -6,17 +6,17 @@ class LoginPage {
     
     //Methods
     visit(){
-         cy.visit("https://dashboard.uniblock.dev/auth/login")
+         return cy.visit("https://dashboard.uniblock.dev/auth/login")
     }
 
     setEmail(email)
     {
-        //cy.get(this.txtEmail).clear()
+        cy.get(this.txtEmail).clear()
         cy.get(this.txtEmail).type(email)
     }
     setPassword(password)
     {
-        //cy.get(this.txtEmail).clear()
+        cy.get(this.txtPword).clear()
         cy.get(this.txtPword).type(password)
     }
     clickLoginButton(){
