@@ -1,12 +1,13 @@
-class LoginPage {
+class SignupPage {
     //Selectors
     txtEmail="input[name='email']";
     txtPword="input[name='password']";
+    txtconfirmPword="input[name='confirmPassword']";
     btnSubmit="button[type='submit']"
     
     //Methods
     visit(){
-         return cy.visit("https://dashboard.uniblock.dev/auth/login")
+         return cy.visit("auth/login")
     }
 
     setEmail(email)
@@ -19,9 +20,14 @@ class LoginPage {
         cy.get(this.txtPword).clear()
         cy.get(this.txtPword).type(password)
     }
-    clickLoginButton(){
+    setConfirmPassword(confirmPassword)
+    {
+        cy.get(this.txtconfirmPword).clear()
+        cy.get(this.txtconfirmPword).type(confirmPassword)
+    }
+    clickSignupButton(){
         cy.get(this.btnSubmit).click()
     }
 }
 
-export default LoginPage;
+export default SignupPage;

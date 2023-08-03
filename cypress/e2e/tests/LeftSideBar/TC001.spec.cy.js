@@ -1,4 +1,4 @@
-import LoginPage from "../../objects/LoginPage"
+import LoginPage from "../../objects/LoginPage.object"
 
 describe("Scenario: Verify Left side Bar", () => {
     var LoginPageObject = new LoginPage()
