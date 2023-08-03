@@ -23,3 +23,12 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+///  <reference types="cypress"/>
+/// <reference types="cypress-xpath"/>
+
+
+Cypress.Commands.add("Logout", ()=>{
+    cy.xpath("(//img[@class='MuiAvatar-img css-1hy9t21'])[1]").click()
+    cy.xpath("(//li[contains(@class,'MuiButtonBase-root MuiMenuItem-root')])[4]").click()
+})
