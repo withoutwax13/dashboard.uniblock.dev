@@ -17,9 +17,9 @@ describe("Scenario: Verify Left side Bar", () => {
         cy.Logout()
         })
     
-    it("TC001 - Verify PROJECTS Section on Dashboard Page", () => {
+    it("TC002 - Verify RESOURCES Section on Dashboard Page", () => {
 
-        cy.get(':nth-child(1) > .MuiTypography-inherit > .MuiButtonBase-root').should('exist')
+        cy.get('li').contains('resources').should('exist')
         .and('be.visible')
     })
 })

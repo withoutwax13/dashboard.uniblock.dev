@@ -17,9 +17,16 @@ describe("Scenario: Verify Left side Bar", () => {
         cy.Logout()
         })
     
-    it("TC001 - Verify PROJECTS Section on Dashboard Page", () => {
-
-        cy.get(':nth-child(1) > .MuiTypography-inherit > .MuiButtonBase-root').should('exist')
-        .and('be.visible')
+    it("TC005 - Verify Docs Navigation in RESOURCES Section", () => {
+        cy.intercept('GET', 'https://docs.uniblock.dev/').as('linkClicked');
+        cy.get('a').contains('Docs').click()
+        cy.wait('@linkClicked').then((interception) => {
+            const url = interception.response.url;
+            cy.visit(url); // Visit the URL in the same window
+        })
+        //Verify if the URL is correct
+        cy.url().should('include', 'https://docs.uniblock.dev/');
+        cy.go('back')
     })
+        
 })

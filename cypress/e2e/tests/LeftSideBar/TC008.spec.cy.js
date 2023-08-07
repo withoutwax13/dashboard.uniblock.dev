@@ -17,9 +17,16 @@ describe("Scenario: Verify Left side Bar", () => {
         cy.Logout()
         })
     
-    it("TC001 - Verify PROJECTS Section on Dashboard Page", () => {
+    it("TC007 - Verify Overview Navigation in PROJECTS Section", () => {
+        //Verify that there is a project
+        cy.get('td:nth-child(2)').should('exist')
+        .click()
 
-        cy.get(':nth-child(1) > .MuiTypography-inherit > .MuiButtonBase-root').should('exist')
-        .and('be.visible')
+        //Click on the Get Started link
+        cy.get('a').contains('Overview').should('exist').click()
+
+        //Verify that the page redirected by checking the url
+        cy.url().should('include', '/overview')
     })
+        
 })

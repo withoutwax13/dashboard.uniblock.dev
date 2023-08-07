@@ -29,6 +29,8 @@
 
 
 Cypress.Commands.add("Logout", ()=>{
-    cy.xpath("(//img[@class='MuiAvatar-img css-1hy9t21'])[1]").click()
-    cy.xpath("(//li[contains(@class,'MuiButtonBase-root MuiMenuItem-root')])[4]").click()
+    //cy.xpath("(//img[@class='MuiAvatar-img css-1hy9t21'])[1]").click()
+    //cy.xpath("(//li[contains(@class,'MuiButtonBase-root MuiMenuItem-root')])[4]").click()
+    cy.get('.MuiButtonBase-root > .MuiAvatar-root > .MuiAvatar-img').click()
+    cy.get('.MuiPaper-root > :nth-child(8)').click()
 })
