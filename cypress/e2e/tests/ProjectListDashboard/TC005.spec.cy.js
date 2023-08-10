@@ -16,33 +16,22 @@ describe("Scenario: Verify project list dashboard", () => {
     })
     afterEach(()=>{
         // Post-Condition: Delete and Logout
-
-        //Project 1
-        cy.get('div').contains('testProject1').click()
-        cy.get('.MuiPaper-root > .MuiList-root > :nth-child(2) > .MuiButtonBase-root').click()
-        cy.get('#confirmProjectName').type('testProject1')
-        cy.get('.MuiDialogActions-root > .MuiButton-contained').click()
+        const projectNames = [  'testProject1', 'testProject2', 'testProject3', 'testProject4', 'testProject5' ];
         
-        //2
-        cy.get('div').contains('testProject2').click()
-        cy.get('.MuiPaper-root > .MuiList-root > :nth-child(2) > .MuiButtonBase-root').click()
-        cy.get('#confirmProjectName').type('testProject2')
-        cy.get('.MuiDialogActions-root > .MuiButton-contained').click()
-        //Project 3
-        cy.get('div').contains('testProject3').click()
-        cy.get('.MuiPaper-root > .MuiList-root > :nth-child(2) > .MuiButtonBase-root').click()
-        cy.get('#confirmProjectName').type('testProject3')
-        cy.get('.MuiDialogActions-root > .MuiButton-contained').click()
-        //Project 4
-        cy.get('div').contains('testProject4').click()
-        cy.get('.MuiPaper-root > .MuiList-root > :nth-child(2) > .MuiButtonBase-root').click()
-        cy.get('#confirmProjectName').type('testProject4')
-        cy.get('.MuiDialogActions-root > .MuiButton-contained').click()
-        //Project 5
-        cy.get('div').contains('testProject5').click()
-        cy.get('.MuiPaper-root > .MuiList-root > :nth-child(2) > .MuiButtonBase-root').click()
-        cy.get('#confirmProjectName').type('testProject5')
-        cy.get('.MuiDialogActions-root > .MuiButton-contained').click()
+        projectNames.forEach((projectName) => {
+            //Click the sorting button of the 'Created At' column
+            cy.wait(500)
+            cy.get('div').contains('Created At').click()
+            cy.wait(500)
+            cy.get('div').contains(projectName).click();
+            cy.wait(500)
+            cy.get('.MuiPaper-root > .MuiList-root > :nth-child(2) > .MuiButtonBase-root').click();
+            cy.wait(500)
+            cy.get('#confirmProjectName').type(projectName);
+            cy.wait(500)
+            cy.get('.MuiDialogActions-root > .MuiButton-contained').click();
+        });
+
         cy.Logout()
         
         })
@@ -63,29 +52,15 @@ describe("Scenario: Verify project list dashboard", () => {
         //Verify the url it should include /project/list	
         cy.url().should('include', '/projects/list')
 
-        //Create 2nd project
-        //Input projectName in the text field
-        cy.get('.css-6su6fj > .MuiButtonBase-root').click()	
-        cy.get('#projectName').type("testProject2")
-        cy.get('.MuiDialogActions-root > .MuiButton-contained').click()
+        //Create 2 to 5 project
+        const projectNames = ['testProject2', 'testProject3', 'testProject4', 'testProject5' ];
 
-        //Create 3rd project
-        //Input projectName in the text field
-        cy.get('.css-6su6fj > .MuiButtonBase-root').click()	
-        cy.get('#projectName').type("testProject3")
-        cy.get('.MuiDialogActions-root > .MuiButton-contained').click()
+        projectNames.forEach((projectName) => {
+            cy.get('.css-6su6fj > .MuiButtonBase-root').click();
+            cy.get('#projectName').type(projectName);
+            cy.get('.MuiDialogActions-root > .MuiButton-contained').click();
+          });
 
-        //Create 4th project
-        //Input projectName in the text field
-        cy.get('.css-6su6fj > .MuiButtonBase-root').click()	
-        cy.get('#projectName').type("testProject4")
-        cy.get('.MuiDialogActions-root > .MuiButton-contained').click()
-        
-        //Create 5th project
-        //Input projectName in the text field
-        cy.get('.css-6su6fj > .MuiButtonBase-root').click()	
-        cy.get('#projectName').type("testProject5")
-        cy.get('.MuiDialogActions-root > .MuiButton-contained').click()
 
         //Verify if the list has 5 projects
         cy.get("table tbody tr").should("have.length", 5);

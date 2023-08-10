@@ -20,17 +20,17 @@ describe("Scenario: Verify project list dashboard", () => {
         projectNames.forEach((projectName) => {
             //Click the sorting button of the 'Created At' column
             
-            cy.wait(300)
+            cy.wait(500)
             cy.get('div').contains('Created At').click()
-            cy.wait(300)
+            cy.wait(500)
             cy.get('div').contains(projectName).click();
-            cy.wait(300)
+            cy.wait(500)
             cy.get('.MuiPaper-root > .MuiList-root > :nth-child(2) > .MuiButtonBase-root').click();
-            cy.wait(300)
+            cy.wait(500)
             cy.get('#confirmProjectName').type(projectName);
-            cy.wait(300)
+            cy.wait(500)
             cy.get('.MuiDialogActions-root > .MuiButton-contained').click();
-            cy.wait(300)
+            cy.wait(500)
         });
         
         cy.Logout()

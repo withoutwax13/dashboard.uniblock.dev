@@ -33,6 +33,7 @@ describe("Signup Scenario: TC004", () => {
         //Input valid email 
         //Input invalid password format
         SignupPageObject.setEmail(validEmail)
+        cy.get("input[name='email']").type('@gmail.com')
         SignupPageObject.setPassword("As0")
         SignupPageObject.setConfirmPassword("As0")
 

@@ -48,8 +48,11 @@ describe("Signup Scenario: TC001", () => {
             .get('p').contains('matches').should('have.attr', 'style', 'color: green;')
 
 
-        //Verify that the Create account button is still enabled
         SignupPageObject.clickSignupButton()
-        cy.Logout()
+        //Verify Success Message
+
+        cy.get('div').contains('successfully').should('exist')
+        //CLick return to sign in
+        cy.get('.css-1fe28ud').contains('Return to').click()
     })
 })

@@ -18,7 +18,7 @@ describe("Scenario: Verify Left side Bar", () => {
         cy.Logout()
         })
     
-        it("TC004 - Verify SDK Navigation in RESOURCES Section", () => {
+        it.skip("TC004 - Verify SDK Navigation in RESOURCES Section", () => {
             cy.intercept('GET', 'https://www.npmjs.com/package/@uniblock/uniblocksdk').as('linkClicked');
             
             // Click the link

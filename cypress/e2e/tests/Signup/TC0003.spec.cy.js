@@ -4,7 +4,7 @@ describe("Signup Scenario: TC003", () => {
 
     var SignupPageObject = new SignupPage()
     var pageUrl, title, validEmail, validPassword, loginPageUrl
-
+    const timestamp = new Date().getTime();
     before(() => {
         //Load data from fixture
         cy.fixture('appData').then(data => {
