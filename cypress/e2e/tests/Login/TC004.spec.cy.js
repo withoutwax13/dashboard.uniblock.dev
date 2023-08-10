@@ -25,6 +25,8 @@ describe("Login Scenario: TC004", () => {
             .title().should('eq', title)
 
         LoginPageObject.setEmail(validEmail)
+        cy.get("input[name='email']").type('@gmail.com')
+        
         LoginPageObject.clickLoginButton();
         //verify error message password is required
 

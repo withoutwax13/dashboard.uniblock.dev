@@ -25,6 +25,8 @@ describe("Login Scenario: TC007", () => {
             .title().should('eq', title)
 
         LoginPageObject.setEmail(validEmail)
+        cy.get("input[name='email']").type('@gmail.com')
+        
         LoginPageObject.setPassword(validPassword)
         //Verify that the input type for password is password
         cy.get('input[name=password]').should('have.attr', "type", "password")

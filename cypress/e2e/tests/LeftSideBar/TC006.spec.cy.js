@@ -7,6 +7,7 @@ describe("Scenario: Verify Left side Bar", () => {
         LoginPageObject.visit()
         cy.fixture('appData').then((data)=>{
             LoginPageObject.setEmail(data.LoginPage.validCredentials.email)
+            cy.get("input[name='email']").type('@gmail.com')
             LoginPageObject.setPassword(data.LoginPage.validCredentials.password)
             LoginPageObject.clickLoginButton();
             cy.title().should('eq', data.Dashboard.title).should('not.eq', data.LoginPage.title)

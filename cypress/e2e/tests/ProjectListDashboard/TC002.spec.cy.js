@@ -7,30 +7,33 @@ describe("Scenario: Verify project list dashboard", () => {
         LoginPageObject.visit()
         cy.fixture('appData').then((data)=>{
             LoginPageObject.setEmail(data.LoginPage.validCredentials.email)
+            cy.get("input[name='email']").type('+2@gmail.com')
             LoginPageObject.setPassword(data.LoginPage.validCredentials.password)
             LoginPageObject.clickLoginButton();
             cy.title().should('eq', 'Home | Uniblock Dashboard').should('not.eq', data.LoginPage.title)
         })
+    
     })
     afterEach(()=>{
         // Post-Condition: Logout
         cy.Logout()
+        
         })
     
-    it("TC001 - Ensure the dashboard displays an appropriate message when there are no projects available.", () => {
-        //Verify that the page is correct
-        cy.url().should('include', 'new-user')
-        
+    it("TC002 - Create a new project in the Home | Uniblock Dashboard", () => {
         //Verify that the project shows expected message
         cy.get('p').contains('Welcome to Uniblock').should('be.visible')
-        //cy.get('p').contains('Create your first project').should('be.visible')
-       
-        //Proceed to dashboard
-        cy.get('.MuiButtonBase-root > .MuiAvatar-root > .MuiAvatar-img').click()
-        cy.get('.css-1kxe5pk > :nth-child(2)').click()
 
-        //Check if the table displays No Project
-        cy.get(':nth-child(1) > .MuiTypography-inherit > .MuiButtonBase-root').click()
-        cy.get('div').contains('No Projects').should('be.visible')
+        //Click the New Project Button
+        cy.get('.MuiStack-root > button.MuiButtonBase-root').click()
+
+        //Input projectName in the text field	
+        cy.get('#projectName').type("testProject")
+        
+        //Click create	
+        cy.get('.MuiDialogActions-root > .MuiButton-contained').click()
+
+        //Verify the url it should include /project/list	
+        cy.url().should('include', '/projects/list')
     })
 })

@@ -3,7 +3,7 @@
         "url" : "https://dashboard.uniblock.dev/auth/login",
         "title": "Login | Uniblock Dashboard",
         "validCredentials": {
-            "email": "renzdesierra08@gmail.com",
+            "email": "renzdesierra08",
             "password": "Desierrafamily0"
         }
     },
@@ -17,7 +17,7 @@
         "loginurl" : "https://dashboard.uniblock.dev/auth/login",
         "title": "Register | Uniblock Dashboard",
         "validCredentials":{
-            "email": "renzdesierra08@gmail.com+2",
+            "email": "renzdesierra08",
             "password": "Desierrafamily0"
         }
     }

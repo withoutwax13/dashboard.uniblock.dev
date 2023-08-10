@@ -7,6 +7,7 @@ describe("Scenario: Verify project list dashboard", () => {
         LoginPageObject.visit()
         cy.fixture('appData').then((data)=>{
             LoginPageObject.setEmail(data.LoginPage.validCredentials.email)
+            cy.get("input[name='email']").type('+2@gmail.com')
             LoginPageObject.setPassword(data.LoginPage.validCredentials.password)
             LoginPageObject.clickLoginButton();
             cy.title().should('eq', 'Home | Uniblock Dashboard').should('not.eq', data.LoginPage.title)
@@ -23,8 +24,7 @@ describe("Scenario: Verify project list dashboard", () => {
         
         //Verify that the project shows expected message
         cy.get('p').contains('Welcome to Uniblock').should('be.visible')
-        //cy.get('p').contains('Create your first project').should('be.visible')
-       
+        
         //Proceed to dashboard
         cy.get('.MuiButtonBase-root > .MuiAvatar-root > .MuiAvatar-img').click()
         cy.get('.css-1kxe5pk > :nth-child(2)').click()

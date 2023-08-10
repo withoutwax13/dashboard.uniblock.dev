@@ -4,6 +4,7 @@ describe("Signup Scenario: TC001", () => {
 
     var SignupPageObject = new SignupPage()
     var pageUrl, title, validEmail, validPassword, loginPageUrl
+    const timestamp = new Date().getTime();
 
     before(() => {
         //Load data from fixture
@@ -31,8 +32,10 @@ describe("Signup Scenario: TC001", () => {
             .title().should('eq', title)
 
         //Input valid email 
-        //Input invalid password format
         SignupPageObject.setEmail(validEmail)
+        cy.get("input[name='email']").type(`+${timestamp}@gmail.com`)
+        //Input invalid password format
+        
         SignupPageObject.setPassword(validPassword)
         SignupPageObject.setConfirmPassword(validPassword)
 

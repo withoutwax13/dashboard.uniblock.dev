@@ -25,6 +25,8 @@ describe("Login Scenario: TC003", () => {
             .title().should('eq', title)
 
         LoginPageObject.setEmail(validEmail)
+        //add gmail
+        cy.get("input[name='email']").type('@gmail.com')
         LoginPageObject.setPassword(validPassword)
         LoginPageObject.clickLoginButton();
         //Verify succesfull login
