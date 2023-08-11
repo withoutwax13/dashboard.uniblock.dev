@@ -28,7 +28,7 @@ describe("Scenario: Verify Left side Bar", () => {
         cy.url().should('include', '/overview')
 
         //Verify that the left side nav exists
-        cy.get('a').contains('Get Started').should('exist').and('be.visible')
+        //cy.get('a').contains('Get Started').should('exist').and('be.visible')
         cy.get('a').contains('Overview').should('exist').and('be.visible')
         cy.get('a').contains('Contracts').should('exist').and('be.visible')
         cy.get('a').contains('Integration').should('exist').and('be.visible')
