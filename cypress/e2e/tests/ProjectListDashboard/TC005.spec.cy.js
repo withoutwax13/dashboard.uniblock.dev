@@ -30,6 +30,7 @@ describe("Scenario: Verify project list dashboard", () => {
             cy.get('#confirmProjectName').type(projectName);
             cy.wait(500)
             cy.get('.MuiDialogActions-root > .MuiButton-contained').click();
+            cy.wait(500)
         });
 
         cy.Logout()
