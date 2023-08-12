@@ -7,9 +7,9 @@ class LoginPage {
     }
 
     // Methods
-    visit() {
+    visit(paramObj = {}) {
         cy.viewport(1920, 1080);
-        cy.visit("auth/login");
+        cy.visit("auth/login", paramObj);
         cy.window().then(($win) => {
             if ($win.document.URL === "https://dashboard.uniblock.dev/dashboard/projects/list") {
                 cy.Logout().then(() => {
