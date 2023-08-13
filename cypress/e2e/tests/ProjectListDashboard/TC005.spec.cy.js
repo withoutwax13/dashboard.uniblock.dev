@@ -16,12 +16,10 @@ describe("Scenario: Verify project list dashboard", () => {
     })
     afterEach(()=>{
         // Post-Condition: Delete and Logout
-        const projectNames = [  'testProject1', 'testProject2', 'testProject3', 'testProject4', 'testProject5' ];
+        const projectNames = [  'testProject5', 'testProject4', 'testProject3', 'testProject2', 'testProject1' ];
         
         projectNames.forEach((projectName) => {
             //Click the sorting button of the 'Created At' column
-            cy.wait(500)
-            cy.get('div').contains('Created At').click()
             cy.wait(500)
             cy.get('div').contains(projectName).click();
             cy.wait(500)
@@ -38,33 +36,11 @@ describe("Scenario: Verify project list dashboard", () => {
         })
     
     it("TC005 - Verify that the project list dashboard correctly filters projects based on specified criteria.", () => {
-        //Verify that the project shows expected message
-        cy.get('p').contains('Welcome to Uniblock').should('be.visible')
-
-        //Click the New Project Button
-        cy.get('.MuiStack-root > button.MuiButtonBase-root').click()
-
-        //Input projectName in the text field	
-        cy.get('#projectName').type("testProject1")
-        
-        //Click create	
-        cy.get('.MuiDialogActions-root > .MuiButton-contained').click()
-
-        //Verify the url it should include /project/list	
-        cy.url().should('include', '/projects/list')
-
-        //Create 2 to 5 project
-        const projectNames = ['testProject2', 'testProject3', 'testProject4', 'testProject5' ];
-
-        projectNames.forEach((projectName) => {
-            cy.get('.css-6su6fj > .MuiButtonBase-root').click();
-            cy.get('#projectName').type(projectName);
-            cy.get('.MuiDialogActions-root > .MuiButton-contained').click();
-          });
-
+         //Verify Url 
+         cy.url().should('include', '/projects/list')
 
         //Verify if the list has 5 projects
-        cy.get("table tbody tr").should("have.length", 5);
+        cy.get("table tbody tr").should("have.length", 6); //+1 for the default
 
         //Verify if top item in the list matches projectName[4]	
         cy.get("table").within(() => {

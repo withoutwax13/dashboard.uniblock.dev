@@ -15,25 +15,6 @@ describe("Scenario: Verify project list dashboard", () => {
     
     })
     afterEach(()=>{
-        
-        const projectNames = [  'testProject28', 'testProject27', 'testProject26', 'testProject25', 'testProject24', 'testProject23', 'testProject22',
-        'testProject21', 'testProject20', 'testProject19', 'testProject18', 'testProject17', 'testProject16', 'testProject15', 'testProject14',
-        'testProject13', 'testProject12', 'testProject11', 'testProject10', 'testProject9', 'testProject8','testProject7',
-        'testProject6', 'testProject5', 'testProject4', 'testProject3', 'testProject2', 'testProject1' ];
-        projectNames.forEach((projectName) => {
-            //Click the sorting button of the 'Created At' column
-            //cy.wait(500)
-            //cy.get('div').contains('Created At').click()
-            cy.wait(500)
-            cy.get('div').contains(projectName).click();
-            cy.wait(500)
-            cy.get('.MuiPaper-root > .MuiList-root > :nth-child(2) > .MuiButtonBase-root').click();
-            cy.wait(500)
-            cy.get('#confirmProjectName').type(projectName);
-            cy.wait(500)
-            cy.get('.MuiDialogActions-root > .MuiButton-contained').click();
-            cy.wait(500)
-        });
 
         cy.Logout()
         })

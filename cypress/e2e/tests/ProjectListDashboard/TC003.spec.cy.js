@@ -18,8 +18,11 @@ describe("Scenario: Verify project list dashboard", () => {
     afterEach(()=>{
         // Post-Condition: Delete the test project thenLogout
         cy.get('div').contains('testProject').click()
+        cy.wait(500)
         cy.get('.MuiPaper-root > .MuiList-root > :nth-child(2) > .MuiButtonBase-root').click()
+        cy.wait(500)
         cy.get('#confirmProjectName').type('testProject')
+        cy.wait(500)
         cy.get('.MuiDialogActions-root > .MuiButton-contained').click()
         cy.Logout()
         })
