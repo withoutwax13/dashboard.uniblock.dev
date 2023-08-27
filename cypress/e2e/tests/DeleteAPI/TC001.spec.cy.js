@@ -1,6 +1,6 @@
 import LoginPage from "../../objects/LoginPage.object"
 
-describe("Scenario: Verify adding project API key feature", () => {
+describe("Scenario: Verify deleting project API key feature", () => {
     var LoginPageObject = new LoginPage()
 
     beforeEach(()=>{
