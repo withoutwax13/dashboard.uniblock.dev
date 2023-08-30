@@ -19,7 +19,7 @@ describe("Scenario: Verify project list dashboard", () => {
         // Post-Condition: Delete the test project thenLogout
         cy.get('div').contains('testProject').click()
         cy.wait(500)
-        cy.get('.MuiPaper-root > .MuiList-root > :nth-child(2) > .MuiButtonBase-root').click()
+        cy.get('.css-wvtjil').contains('Delete').click()
         cy.wait(500)
         cy.get('#confirmProjectName').type('testProject')
         cy.wait(500)
@@ -30,7 +30,7 @@ describe("Scenario: Verify project list dashboard", () => {
     it("TC003 - Check if the dashboard displays the correct projects with their relevant details.", () => {
         
         //Verify if page displays projectName under name column	
-        cy.url().should('eq', 'https://dashboard.uniblock.dev/dashboard/projects/list')
+        cy.url().should('eq', 'https://dashboard-test.uniblock.dev/dashboard/projects/list')
         //Verify if page displays projectName under name column
         cy.get("table").within(() => {
 

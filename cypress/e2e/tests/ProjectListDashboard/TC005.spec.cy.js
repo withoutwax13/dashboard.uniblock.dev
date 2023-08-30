@@ -23,7 +23,7 @@ describe("Scenario: Verify project list dashboard", () => {
             cy.wait(500)
             cy.get('div').contains(projectName).click();
             cy.wait(500)
-            cy.get('.MuiPaper-root > .MuiList-root > :nth-child(2) > .MuiButtonBase-root').click();
+            cy.get('.css-wvtjil').contains('Delete').click()
             cy.wait(500)
             cy.get('#confirmProjectName').type(projectName);
             cy.wait(500)

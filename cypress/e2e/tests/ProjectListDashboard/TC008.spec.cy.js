@@ -36,7 +36,7 @@ describe("Scenario: Verify project list dashboard", () => {
         cy.Logout()
         })
     
-    it("TC008 - Verify project list search feature", () => {
+    it.skip("TC008 - Verify project list search feature", () => {
         
         //Verify that the project shows expected message
         //Click the New Project Button

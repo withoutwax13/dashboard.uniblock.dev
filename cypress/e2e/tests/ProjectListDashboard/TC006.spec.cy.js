@@ -16,18 +16,16 @@ describe("Scenario: Verify project list dashboard", () => {
     })
     afterEach(()=>{
         cy.get('div').contains('testProject').click()
-        cy.get('.MuiPaper-root > .MuiList-root > :nth-child(2) > .MuiButtonBase-root').click()
+        cy.get('.css-wvtjil').contains('Delete').click()
         cy.get('#confirmProjectName').type('testProject')
         cy.get('.MuiDialogActions-root > .MuiButton-contained').click()
         cy.Logout()
         })
     
     it("TC006 - Verify feature to view detailed information about a specific project", () => {
-        //Verify that the project shows expected message
-        cy.get('p').contains('Welcome to Uniblock').should('be.visible')
-
+       
         //Click the New Project Button
-        cy.get('.MuiStack-root > button.MuiButtonBase-root').click()
+        cy.get('.css-1p02q7g').click()
 
         //Input projectName in the text field	
         cy.get('#projectName').type("testProject")

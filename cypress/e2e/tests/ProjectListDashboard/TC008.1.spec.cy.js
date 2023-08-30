@@ -38,7 +38,7 @@ describe("Scenario: Verify project list dashboard", () => {
         
         })
     
-    it("TC002 - Create a new project in the Home | Uniblock Dashboard", () => {
+    it("TC008.1 - Delete every project", () => {
         /*//Type test in search bar
         cy.get('.css-1l2agqa').type('test')
 

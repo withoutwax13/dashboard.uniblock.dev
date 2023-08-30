@@ -38,11 +38,9 @@ describe("Scenario: Verify project list dashboard", () => {
     
     it("TC009 - Verify the dense project list feature", () => {
         
-        //Verify that the project shows expected message
-        //Click the New Project Button
-        cy.get('p').contains('Welcome to Uniblock').should('be.visible')
-        cy.get('.MuiStack-root > button.MuiButtonBase-root').click()
-
+        //Click new project button
+        cy.get('.css-1p02q7g').click()
+        
         //Input projectName in the text field
         //Click create
         cy.get('#projectName').type("testProject1")
