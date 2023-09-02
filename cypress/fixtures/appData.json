@@ -1,23 +1,23 @@
 {
     "LoginPage":{
-        "url" : "https://dashboard.uniblock.dev/auth/login",
+        "url" : "https://dashboard-test.uniblock.dev/auth/login",
         "title": "Login | Uniblock Dashboard",
         "validCredentials": {
-            "email": "renzdesierra08@gmail.com",
+            "email": "renzdesierra08",
             "password": "Desierrafamily0"
         }
     },
     "Dashboard": {
-        "url": "https://dashboard.uniblock.dev/dashboard/projects/list",
+        "url": "https://dashboard-test.uniblock.dev/dashboard/projects/list",
         "title": "Projects: List | Uniblock Dashboard"
 
     },
     "SignupPage": {
-        "url": "https://dashboard.uniblock.dev/auth/register",
-        "loginurl" : "https://dashboard.uniblock.dev/auth/login",
+        "url": "https://dashboard-test.uniblock.dev/auth/register",
+        "loginurl" : "https://dashboard-test.uniblock.dev/auth/login",
         "title": "Register | Uniblock Dashboard",
         "validCredentials":{
-            "email": "renzdesierra08@gmail.com+2",
+            "email": "renzdesierra08@",
             "password": "Desierrafamily0"
         }
     }
