@@ -10,7 +10,7 @@ describe("Scenario: Verify project item overview page", () => {
             cy.get("input[name='email']").type('+2@gmail.com')
             LoginPageObject.setPassword(data.LoginPage.validCredentials.password)
             LoginPageObject.clickLoginButton();
-            //cy.title().should('eq', 'Get Started | Uniblock Dashboard').should('not.eq', data.LoginPage.title)
+            cy.title().should('eq', 'Projects: List | Uniblock Dashboard').should('not.eq', data.LoginPage.title)
         })
     })
     afterEach(()=>{
@@ -30,6 +30,6 @@ describe("Scenario: Verify project item overview page", () => {
         cy.get('div').contains('Delete project').should('exist')
 
         //Verify the section contains a button
-        cy.get('.css-9oxhh4').should('have.attr', 'role', 'button');
+        cy.get('div').contains('Delete').should('have.attr', 'role', 'button');
     })
 })

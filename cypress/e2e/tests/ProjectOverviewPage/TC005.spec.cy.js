@@ -10,14 +10,15 @@ describe("Scenario: Verify project item overview page", () => {
             cy.get("input[name='email']").type('+2@gmail.com')
             LoginPageObject.setPassword(data.LoginPage.validCredentials.password)
             LoginPageObject.clickLoginButton();
-            //cy.title().should('eq', 'Get Started | Uniblock Dashboard').should('not.eq', data.LoginPage.title)
+            cy.title().should('eq', 'Projects: List | Uniblock Dashboard').should('not.eq', data.LoginPage.title)
         })
     })
     afterEach(()=>{
         // Post-Condition: Delete extra API key then Logout
         
-        cy.xpath("(//div[@class='MuiBox-root css-17hckkm']//button)[1]").click()
-        cy.get('.css-1jhao0x').click()
+        cy.get('table tbody tr td').eq(3).find('button').click()
+        cy.wait(500)
+        cy.get('button').contains('Delete').click()
         cy.Logout()
         })
     
@@ -36,6 +37,6 @@ describe("Scenario: Verify project item overview page", () => {
         cy.get('button').contains('New API').should('exist').click()
 
         //Verify API item list length is 2	
-        cy.get('.css-1spjef0').find('tr').should('have.length', 3) //+1 for the menu on the bottom
+        cy.get('table tbody').find('tr').should('have.length', 3) //+1 for the menu on the bottom
     })
 })

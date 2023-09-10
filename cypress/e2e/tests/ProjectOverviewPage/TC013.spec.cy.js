@@ -10,18 +10,17 @@ describe("Scenario: Verify project item overview page", () => {
             cy.get("input[name='email']").type('+2@gmail.com')
             LoginPageObject.setPassword(data.LoginPage.validCredentials.password)
             LoginPageObject.clickLoginButton();
-            //cy.title().should('eq', 'Get Started | Uniblock Dashboard').should('not.eq', data.LoginPage.title)
+            cy.title().should('eq', 'Projects: List | Uniblock Dashboard').should('not.eq', data.LoginPage.title)
+        
         })
     })
     afterEach(()=>{
         // Post-Condition:Delete the project then Logout
-        cy.get('div').contains('newProject').click()
-        cy.wait(500)
-        cy.get('.css-wvtjil').contains('Delete').click()
+        cy.get('div span').contains('Delete project').click()
         cy.wait(500)
         cy.get('#confirmProjectName').type('newProject')
         cy.wait(500)
-        cy.get('.MuiDialogActions-root > .MuiButton-contained').click()
+        cy.get('button').contains('Delete').click()
         cy.Logout()
         })
     
