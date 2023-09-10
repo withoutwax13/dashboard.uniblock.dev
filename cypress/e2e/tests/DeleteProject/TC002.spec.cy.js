@@ -15,25 +15,26 @@ describe("Scenario: Verify deleting project item feature", () => {
     })
     afterEach(()=>{
         // Post-Condition: Delete project and Logout
+        cy.wait(1000)
         cy.get('div').contains('newProject').click()
-        cy.wait(500)
-        cy.get('.css-wvtjil').contains('Delete').click()
-        cy.wait(500)
+        cy.wait(1000)
+        cy.get('div span').contains('Delete project').click()
+        cy.wait(1000)
         cy.get('#confirmProjectName').type('newProject')
-        cy.wait(500)
-        cy.get('.MuiDialogActions-root > .MuiButton-contained').click()
+        cy.wait(1000)
+        cy.get('button').contains('Delete').click()
         cy.Logout()
         })
     
     it("TC002 - Verify cancelling deleting a project item successfully.", () => {
         //Click New Project Button
-        cy.get('.css-1p02q7g').click()
+        cy.get('button').contains('New Project').click()
 
         //Input projectName in the text field
         cy.get('#projectName').type("newProject")
 
         //Click create button
-        cy.xpath("(//button[contains(@class,'MuiButtonBase-root MuiButton-root')])[3]").click()
+        cy.get('button').contains('Create').click()
 
         //Navigate to the project
         cy.get('div').contains('newProject').click()
@@ -42,18 +43,18 @@ describe("Scenario: Verify deleting project item feature", () => {
         cy.url().should('include', 'dashboard/projects/overview')
 
         //Click Delete button	
-        cy.get('.css-wvtjil').contains('Delete').click()
+        cy.get('div span').contains('Delete project').click()
         cy.wait(500)
 
         //Input projectName in the text input field
         cy.get('#confirmProjectName').type('newProject')
         cy.wait(500)
 
-        //Click cancel button
-        cy.get('.css-z4rakn').click()
+        //Click Close button
+        cy.get('button').contains('Close').click()
 
         //Navigate to Project list
-        cy.xpath("(//div[contains(@class,'MuiButtonBase-root MuiListItemButton-root')])[1]").click()
+        cy.get('a div').contains('projects').click()
         cy.url().should('include', 'https://dashboard-test.uniblock.dev/dashboard/projects/list')
 
         //Verify projectName does exist in project list

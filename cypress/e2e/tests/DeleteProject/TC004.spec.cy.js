@@ -16,26 +16,27 @@ describe("Scenario: Verify deleting project item feature", () => {
     afterEach(()=>{
         // Post-Condition: Logout
         // Post-Condition: Delete project and Logout
+        cy.wait(1000)
         cy.get('div').contains('newProject').click()
-        cy.wait(500)
-        cy.get('.css-wvtjil').contains('Delete').click()
-        cy.wait(500)
+        cy.wait(1000)
+        cy.get('div span').contains('Delete project').click()
+        cy.wait(1000)
         cy.get('#confirmProjectName').type('newProject')
-        cy.wait(500)
-        cy.get('.MuiDialogActions-root > .MuiButton-contained').click()
+        cy.wait(1000)
+        cy.get('button').contains('Delete').click()
         cy.Logout()
         })
     
     it("TC004 - Verify deleting a project item without inputting the project name.", () => {
         
         //Click New Project Button
-        cy.get('.css-1p02q7g').click()
+        cy.get('button').contains('New Project').click()
 
         //Input projectName in the text field
         cy.get('#projectName').type("newProject")
 
         //Click create button
-        cy.xpath("(//button[contains(@class,'MuiButtonBase-root MuiButton-root')])[3]").click()
+        cy.get('button').contains('Create').click()
 
         //Navigate to the project
         cy.get('div').contains('newProject').click()
@@ -44,15 +45,15 @@ describe("Scenario: Verify deleting project item feature", () => {
         cy.url().should('include', 'dashboard/projects/overview')
 
         //Click Delete button	
-        cy.get('.css-wvtjil').contains('Delete').click()
+        cy.get('div span').contains('Delete project').click()
         cy.wait(500)
 
         //Click delete button
-        cy.get('.MuiDialogActions-root > .MuiButton-contained').click()
+        cy.get('button').contains('Delete').click()
 
         //Verify Error Message
         cy.get('div').contains('Required').should('be.visible')
         //Click cancel button
-        cy.get('.css-z4rakn').click()
+        cy.get('button').contains('Close').click()
     })
 })
