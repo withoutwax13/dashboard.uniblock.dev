@@ -14,13 +14,19 @@ describe("Scenario: Verify Left side Bar", () => {
         })
     })
     afterEach(()=>{
-        // Post-Condition: Logout
+        // Post-Condition: delete project and then Logout
+        cy.wait(2000)
+        cy.get('a').contains('Overview').click()
+        cy.get('div span').contains('Delete project').click()
+        cy.get('input[name="confirmProjectName"]').type('testData')
+        cy.get('button').contains('Delete').click()
+        
         cy.Logout()
         })
     
     it("TC013 - Verify Users Navigation in PROJECTS Section", () => {
         //Verify that there is a project
-        cy.get('td:nth-child(2)').should('exist')
+        cy.get('tbody tr td div').contains('testData').should('exist')
         .click()
 
         //Click on the Get Started link

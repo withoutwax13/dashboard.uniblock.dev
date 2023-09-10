@@ -28,10 +28,9 @@ describe("Login Scenario: TC008", () => {
             .click()
 
         //Verify that the url changed to https://dashboard.uniblock.dev/auth/reset-password
-        cy.url().should('eq', 'https://dashboard.uniblock.dev/auth/reset-password')
+        cy.url().should('eq', 'https://dashboard-test.uniblock.dev/auth/reset-password')
 
         //Enter email
-        cy.get('[name=email]')
-            .type("renzdesierra08@gmail.com")
+        cy.get('[name=email]').type("renzdesierra08@gmail.com")
     })
 })

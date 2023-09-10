@@ -31,8 +31,7 @@ describe("Login Scenario: TC007", () => {
         //Verify that the input type for password is password
         cy.get('input[name=password]').should('have.attr', "type", "password")
         //Click the hide or show password icon
-        cy.get('div#__next>div>main>div:nth-of-type(2)>div>form>div>div:nth-of-type(2)>div>div>button').click()
-
+        cy.xpath("(//button[contains(@class,'MuiButtonBase-root MuiIconButton-root')])[1]").click()
         //Verify that the input type changed
         cy.get('input[name=password]').should('have.attr', "type", "text")
     })

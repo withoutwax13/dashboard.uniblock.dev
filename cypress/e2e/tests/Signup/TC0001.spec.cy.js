@@ -50,8 +50,8 @@ describe("Signup Scenario: TC001", () => {
 
         SignupPageObject.clickSignupButton()
         //Verify Success Message
-
         cy.get('div').contains('successfully').should('exist')
+        
         //CLick return to sign in
         cy.get('.css-1fe28ud').contains('Return to').click()
     })

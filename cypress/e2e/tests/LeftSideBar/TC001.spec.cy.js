@@ -20,7 +20,6 @@ describe("Scenario: Verify Left side Bar", () => {
     
     it("TC001 - Verify PROJECTS Section on Dashboard Page", () => {
 
-        cy.get(':nth-child(1) > .MuiTypography-inherit > .MuiButtonBase-root').should('exist')
-        .and('be.visible')
+        cy.get('div span').contains('projects').should('exist').and('be.visible')
     })
 })

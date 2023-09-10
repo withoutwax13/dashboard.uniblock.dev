@@ -47,5 +47,6 @@ describe("Signup Scenario: TC004", () => {
 
 
         //Verify that the Create account button is still disabled
+        cy.get('form div button').contains('Create account').should('be.disabled')
     })
 })

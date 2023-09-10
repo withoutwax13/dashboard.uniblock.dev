@@ -28,7 +28,7 @@ describe("Login Scenario: TC005", () => {
         LoginPageObject.setPassword(validPassword)
         LoginPageObject.clickLoginButton();
         //Verify error message showing user not found
-        cy.get("#notistack-snackbar").contains('User not').should('be.visible')
+        cy.get("#notistack-snackbar").contains('User not found').should('be.visible')
         //verify that page did not proceed to dashboard
         cy.url().should('not.eq', successLoginURL)
         cy.title().should('not.eq', successLoginTitle)

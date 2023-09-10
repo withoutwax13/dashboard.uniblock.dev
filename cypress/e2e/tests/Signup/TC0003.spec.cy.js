@@ -45,7 +45,7 @@ describe("Signup Scenario: TC003", () => {
             .get('p').contains('one number').should('have.attr', 'style', 'color: green;')
             .get('p').contains('matches').should('have.attr', 'style', 'color: green;')
 
-
         //Verify that the Create account button is still disabled
+        cy.get('form div button').contains('Create account').should('be.disabled')
     })
 })

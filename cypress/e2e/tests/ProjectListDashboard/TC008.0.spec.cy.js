@@ -10,7 +10,7 @@ describe("Scenario: Verify project list dashboard", () => {
             cy.get("input[name='email']").type('+2@gmail.com')
             LoginPageObject.setPassword(data.LoginPage.validCredentials.password)
             LoginPageObject.clickLoginButton();
-            //cy.title().should('eq', 'Home | Uniblock Dashboard').should('not.eq', data.LoginPage.title)
+            cy.title().should('eq', 'Projects: List | Uniblock Dashboard').should('not.eq', data.LoginPage.title)
         })
     
     })
@@ -24,43 +24,43 @@ describe("Scenario: Verify project list dashboard", () => {
         cy.url().should('include', '/projects/list')
 
         //Type test in search bar
-        cy.get('.css-1l2agqa').type('test')
+        cy.get('input[placeholder="Search..."').type('test')
 
         // set to 25
-        cy.get('.css-x23ptm').click()
+        cy.get('div[aria-haspopup="listbox"]').contains('5').click()
         cy.get('li.css-11x8hys[data-value=25]').click()
 
         //Verify number of items displayed in the list is 25.	
         cy.get("table tbody tr").should("have.length", 26); //+1 for the hidden tr ccontaining the no project text
 
         //Type testProject in search bar
-        cy.get('.css-1l2agqa').clear()
-        cy.get('.css-1l2agqa').type('testProject')
+        cy.get('input[placeholder="Search..."').clear()
+        cy.get('input[placeholder="Search..."').type('testProject')
 
         //Verify number of items displayed in the list is 25.	
         cy.get("table tbody tr").should("have.length", 26); //+1 for the hidden tr ccontaining the no project text
 
         //Type testProject13 in search bar
-        cy.get('.css-1l2agqa').clear()
-        cy.get('.css-1l2agqa').type('testProject13')
+        cy.get('input[placeholder="Search..."').clear()
+        cy.get('input[placeholder="Search..."').type('testProject13')
 
         //Verify number of items displayed in the list is 1.	
         cy.get("table tbody tr").should("have.length", 2); //+1 for the hidden tr ccontaining the no project text
 
         //Type testProject in search bar
-        cy.get('.css-1l2agqa').clear()
-        cy.get('.css-1l2agqa').type('Project')
+        cy.get('input[placeholder="Search..."').clear()
+        cy.get('input[placeholder="Search..."').type('Project')
 
         //Verify number of items displayed in the list is 25.	
         cy.get("table tbody tr").should("have.length", 26); //+1 for the hidden tr ccontaining the no project text
 
         //Type testProject13 in search bar
-        cy.get('.css-1l2agqa').clear()
-        cy.get('.css-1l2agqa').type('dummy')
+        cy.get('input[placeholder="Search..."').clear()
+        cy.get('input[placeholder="Search..."').type('dummy')
 
         //Verify number of items displayed in the list is 0.	
         cy.get("table tbody tr").should("have.length", 1); //+1 for the hidden tr ccontaining the no project text
-        cy.get('.css-1l2agqa').clear()
+        cy.get('input[placeholder="Search..."').clear()
         cy.wait(500)
     })
 })

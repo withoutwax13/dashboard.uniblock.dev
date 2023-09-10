@@ -20,17 +20,17 @@ describe("Scenario: Verify project list dashboard", () => {
         projectNames.forEach((projectName) => {
             //Click the sorting button of the 'Created At' column
             
-            cy.wait(2000)
+            cy.wait(1000)
             cy.get('div').contains('Created At').click()
-            cy.wait(2000)
+            cy.wait(1000)
             cy.get('div').contains(projectName).click();
-            cy.wait(2000)
-            cy.get('.MuiPaper-root > .MuiList-root > :nth-child(2) > .MuiButtonBase-root').click();
-            cy.wait(2000)
+            cy.wait(1000)
+            cy.get('div span').contains('Delete project').click()
+            cy.wait(1000)
             cy.get('#confirmProjectName').type(projectName);
-            cy.wait(2000)
-            cy.get('.MuiDialogActions-root > .MuiButton-contained').click();
-            cy.wait(2000)
+            cy.wait(1000)
+            cy.get('button').contains('Delete').click()
+            cy.wait(1000)
         });
         
         cy.Logout()
@@ -38,29 +38,21 @@ describe("Scenario: Verify project list dashboard", () => {
     
     it("TC009 - Verify the dense project list feature", () => {
         
-        //Click new project button
-        cy.get('.css-1p02q7g').click()
-        
-        //Input projectName in the text field
-        //Click create
-        cy.get('#projectName').type("testProject1")
-        cy.get('.MuiDialogActions-root > .MuiButton-contained').click()
-
         //Verify the url it should include /project/list	
         cy.url().should('include', '/projects/list')
        
-        const projectNames = ['testProject2', 'testProject3', 'testProject4', 'testProject5' ];
+        const projectNames = ['testProject1', 'testProject2', 'testProject3', 'testProject4', 'testProject5' ];
 
         projectNames.forEach((projectName) => {
-            cy.get('.css-6su6fj > .MuiButtonBase-root').click();
+            cy.get('button').contains('New Project').click();
             cy.get('#projectName').type(projectName);
-            cy.get('.MuiDialogActions-root > .MuiButton-contained').click();
+            cy.get('button').contains('Create').click();
           });
 
           //Click dense button
-          cy.get('.css-sqkpig').should('exist').click()
+          cy.get('span').contains('Dense').should('exist').click()
           //Verify space between project items has collapsed	
-          cy.get(".MuiTableCell-root").each(($cell) => {
+          cy.get("tbody tr td").each(($cell) => {
             cy.wrap($cell).should("have.class", "MuiTableCell-sizeSmall");
           });
     })

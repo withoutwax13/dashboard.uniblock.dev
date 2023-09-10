@@ -28,11 +28,13 @@ describe("Login Scenario: TC009", () => {
         cy.get('a').contains('Forgot password')
             .click()
 
+        cy.url().should('eq', "https://dashboard-test.uniblock.dev/auth/reset-password")
+        
         //Confirm that there is a link for going back to sign in
         cy.get('a').contains('Return to ').should('exist')
             .click()
 
         //Verify if the url is correct 
-        cy.url().should('eq', 'https://dashboard.uniblock.dev/auth/login')
+        cy.url().should('eq', 'https://dashboard-test.uniblock.dev/auth/login')
     })
 })

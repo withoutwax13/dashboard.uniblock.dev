@@ -19,11 +19,11 @@ describe("Scenario: Verify project list dashboard", () => {
         // Post-Condition: Delete the test project thenLogout
         cy.get('div').contains('testProject').click()
         cy.wait(500)
-        cy.get('.css-wvtjil').contains('Delete').click()
+        cy.get('div span').contains('Delete project').click()
         cy.wait(500)
         cy.get('#confirmProjectName').type('testProject')
         cy.wait(500)
-        cy.get('.MuiDialogActions-root > .MuiButton-contained').click()
+        cy.get('button').contains('Delete').click()
         cy.Logout()
         })
     

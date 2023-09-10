@@ -20,7 +20,6 @@ describe("Scenario: Verify Left side Bar", () => {
     
     it("TC002 - Verify RESOURCES Section on Dashboard Page", () => {
 
-        cy.get('li').contains('resources').should('exist')
-        .and('be.visible')
+        cy.get('li').contains('resources').should('exist').and('be.visible')
     })
 })

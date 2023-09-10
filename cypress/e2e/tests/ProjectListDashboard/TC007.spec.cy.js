@@ -10,7 +10,7 @@ describe("Scenario: Verify project list dashboard", () => {
             cy.get("input[name='email']").type('+2@gmail.com')
             LoginPageObject.setPassword(data.LoginPage.validCredentials.password)
             LoginPageObject.clickLoginButton();
-            //cy.title().should('eq', 'Home | Uniblock Dashboard').should('not.eq', data.LoginPage.title)
+            cy.title().should('eq', 'Projects: List | Uniblock Dashboard').should('not.eq', data.LoginPage.title)
         })
     
     })
@@ -26,19 +26,20 @@ describe("Scenario: Verify project list dashboard", () => {
 
         //Input projectName in the text field
         //Click create
+        
         const projectNames = ['testProject1','testProject2', 'testProject3', 'testProject4', 'testProject5', 'testProject6', 'testProject7',
         'testProject8', 'testProject9', 'testProject10', 'testProject11', 'testProject12', 'testProject13', 'testProject14', 'testProject15',
         'testProject16', 'testProject17', 'testProject18', 'testProject19', 'testProject20', 'testProject21', 'testProject22',
         'testProject23', 'testProject24', 'testProject25', 'testProject26', 'testProject27', 'testProject28' ];
 
         projectNames.forEach((projectName) => {
-            cy.get('.css-1p02q7g').click()
-            cy.get('#projectName').type(projectName);
-            cy.get('.MuiDialogActions-root > .MuiButton-contained').click();
+            cy.get('button').contains('New Project').click()
+            cy.get('#projectName').type(projectName)
+            cy.get('button').contains('Create').click()
           });
-
+        
         //Check if set to 5
-        cy.get('.css-x23ptm').should('contain', 5)
+        cy.get('div input[value="5"]').should('exist')
 
         //Verify next page button is enabled then click
         cy.get('button[type="button"][aria-label="Go to next page"]').should('exist').and('be.enabled').click()
@@ -47,7 +48,7 @@ describe("Scenario: Verify project list dashboard", () => {
         cy.get('button[type="button"][aria-label="Go to previous page"]').should('exist').and('be.enabled').click()	
 
         // set to 10
-        cy.get('.css-x23ptm').click()
+        cy.get('div[aria-haspopup="listbox"]').contains('5').click()
         cy.get('li.css-11x8hys[data-value=10]').click()
 
         //Verify number of items displayed in the list is 10.	
@@ -60,7 +61,7 @@ describe("Scenario: Verify project list dashboard", () => {
         cy.get('button[type="button"][aria-label="Go to previous page"]').should('exist').and('be.enabled').click()	
         
         // set to 25
-        cy.get('.css-x23ptm').click()
+        cy.get('div[aria-haspopup="listbox"]').contains('10').click()
         cy.get('li.css-11x8hys[data-value=25]').click()
 
         //Verify number of items displayed in the list is 25.	

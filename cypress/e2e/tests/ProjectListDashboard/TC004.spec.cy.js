@@ -10,7 +10,7 @@ describe("Scenario: Verify project list dashboard", () => {
             cy.get("input[name='email']").type('+2@gmail.com')
             LoginPageObject.setPassword(data.LoginPage.validCredentials.password)
             LoginPageObject.clickLoginButton();
-            cy.title().should('not.eq', data.LoginPage.title)
+            cy.title().should('eq', 'Projects: List | Uniblock Dashboard').should('not.eq', data.LoginPage.title)
         })
     
     })
@@ -21,28 +21,23 @@ describe("Scenario: Verify project list dashboard", () => {
         })
     
     it("TC004 - Verify the project list sorting functionality", () => {
-        /*//Click New Project Button
-        cy.get('.css-1p02q7g').click()
-
-        //Input projectName in the text field	
-        cy.get('#projectName').type("testProject1")
-        
-        //Click create	
-        cy.get('.MuiDialogActions-root > .MuiButton-contained').click()*/
 
         //Verify the url it should include /project/list	
         cy.url().should('include', '/projects/list')
 
-        //Create 2 to 5 project
+        //Create 1 to 5 project
         const projectNames = ['testProject1', 'testProject2', 'testProject3', 'testProject4', 'testProject5' ];
 
         projectNames.forEach((projectName) => {
             cy.wait(1000)
-            cy.get('.css-1p02q7g').click()
+            //Click the new project  button
+            cy.get('button').contains('New Project').click()
             cy.wait(1000)
+            //Type the project name from array
             cy.get('#projectName').type(projectName);
             cy.wait(1000)
-            cy.get('.MuiDialogActions-root > .MuiButton-contained').click();
+            //Click the Create button
+            cy.get('button').contains('Create').click()
             cy.wait(1000)
           });
 

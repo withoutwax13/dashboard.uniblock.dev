@@ -20,8 +20,18 @@ describe("Scenario: Verify Left side Bar", () => {
     
     it("TC006 - Verify PROJECTS Section on Other Pages", () => {
         
+        //Create new project
+        //Click the New Project button
+        cy.get('button').contains('New Project').click()
+
+        //Input namte testData in the project name
+        cy.get('input[name="projectName"]').type('testData')
+
+        //Click the Create button
+        cy.get('button').contains('Create').click()
+
         //Verify that there is a project
-        cy.get('td:nth-child(2)').should('exist')
+        cy.get('tbody tr td div').contains('testData').should('exist')
         .click()
 
         //Verify that the url is correct

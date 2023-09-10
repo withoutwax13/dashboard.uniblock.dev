@@ -10,7 +10,7 @@ describe("Scenario: Verify project list dashboard", () => {
             cy.get("input[name='email']").type('+2@gmail.com')
             LoginPageObject.setPassword(data.LoginPage.validCredentials.password)
             LoginPageObject.clickLoginButton();
-            cy.title().should('not.eq', data.LoginPage.title)
+            cy.title().should('eq', 'Projects: List | Uniblock Dashboard').should('not.eq', data.LoginPage.title)
         })
     
     })
@@ -19,18 +19,18 @@ describe("Scenario: Verify project list dashboard", () => {
         const projectNames = [  'testProject5', 'testProject4', 'testProject3', 'testProject2', 'testProject1' ];
         
         projectNames.forEach((projectName) => {
-            //Click the sorting button of the 'Created At' column
+            
             cy.wait(500)
             cy.get('div').contains(projectName).click();
             cy.wait(500)
-            cy.get('.css-wvtjil').contains('Delete').click()
+            cy.get('div span').contains('Delete project').click()
             cy.wait(500)
             cy.get('#confirmProjectName').type(projectName);
             cy.wait(500)
-            cy.get('.MuiDialogActions-root > .MuiButton-contained').click();
+            cy.get('button').contains('Delete').click()
             cy.wait(500)
         });
-
+        
         cy.Logout()
         
         })
@@ -76,28 +76,28 @@ describe("Scenario: Verify project list dashboard", () => {
             });
           });
         //Verify list displays only projects with selected filter	
-        cy.xpath("//div[contains(@class,'MuiSelect-select MuiSelect-outlined')]").click()
+        cy.get('div[aria-haspopup="listbox"]').contains('All').click()
         cy.get('li').contains('FREE').click()
 
         //Verify if the list has 5 projects
-        cy.get("table tbody tr").should("have.length", 6); //+1 for the hidden tr ccontaining the no project text
+        cy.get("table tbody tr").should("have.length", 6); //+1 for the hidden tr ccontaining the no project image
 
         //Select PRO	
-        cy.xpath("//div[contains(@class,'MuiSelect-select MuiSelect-outlined')]").click()
+        cy.get('div[aria-haspopup="listbox"]').contains('FREE').click()
         cy.get('li').contains('PRO').click()
 
         //Verify if the list has 0 projects
-        cy.get("table tbody tr").should("have.length", 1); //1 for the default containing the no project text
+        cy.get("table tbody tr").should("have.length", 1); //1 for the default containing the no project image
 
         //Select Enter	
-        cy.xpath("//div[contains(@class,'MuiSelect-select MuiSelect-outlined')]").click()
+        cy.get('div[aria-haspopup="listbox"]').contains('PRO').click()
         cy.get('li').contains('ENTER').click()
 
         //Verify if the list has 0 projects
-        cy.get("table tbody tr").should("have.length", 1); //1 for the default containing the no project text
+        cy.get("table tbody tr").should("have.length", 1); //1 for the default containing the no project image
 
         //Verify list displays only projects with selected filter	
-        cy.xpath("//div[contains(@class,'MuiSelect-select MuiSelect-outlined')]").click()
+        cy.get('div[aria-haspopup="listbox"]').contains('ENTER').click()
         cy.get('[data-value="all"]').click()
     })
 })

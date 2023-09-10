@@ -33,7 +33,7 @@ describe("Login Scenario: TC004", () => {
         LoginPageObject.setPassword("adadsa")
         LoginPageObject.clickLoginButton();
         //Verify error message password is incorrect
-        cy.get("div#notistack-snackbar").should("be.visible")
+        cy.get("div#notistack-snackbar").contains("Wrong password").should("be.visible")
 
         //Verify that page did not proceed to dashboard
         cy.url().should('not.eq', successLoginURL)
