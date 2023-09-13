@@ -10,13 +10,44 @@ describe("Scenario: Verify invite collaborator feature	", () => {
             cy.get("input[name='email']").type('+3@gmail.com')
             LoginPageObject.setPassword(data.LoginPage.validCredentials.password)
             LoginPageObject.clickLoginButton();
-            
+            cy.title().should('eq', 'Projects: List | Uniblock Dashboard').should('not.eq', data.LoginPage.title)
         })
     })
     afterEach(()=>{
         // Post-Condition: delete added testuser
-        cy.xpath("(//div[@class='MuiBox-root css-17hckkm']//button)[2]").click()
-        cy.get('.css-1jhao0x').click()
+        cy.get('table tbody tr').eq(2) // Select the 3rd row (index 1)
+        .find('td').eq(3).find('button').click(); // Click the delete button in the 4th column
+        cy.get('button').contains('Delete').click()
+        cy.wait(1000)
+
+        //Invite the ADMIN account for Test Case 08 to use
+        //Click the Invite button.
+        cy.get("button").contains('Invite').click()
+        cy.get('#newUserEmail').click().type('renzdesierra08+3.1@gmail.com')
+        cy.get('form div button').contains('Invite').click()
+        //Edit role make ADMIN
+        cy.get('table tbody tr').eq(0)
+        //Click edit on table
+        .find('td').eq(2).find('button').click();
+        //Click the List to select role
+        cy.get("#edit-user-select").click()
+        cy.get('ul[aria-labelledby="edit-user-select-label"]').within(() => {
+          cy.get('li').should($listItems => {
+            // Get the text content of the list items
+            const listItemTexts = $listItems.map((_, el) => Cypress.$(el).text()).get();
+        
+            // Check the presence of specific items
+            expect(listItemTexts).to.include('Owner');
+            expect(listItemTexts).to.include('Admin');
+            expect(listItemTexts).to.include('User');
+          });
+        });
+        
+        //Click a different role than the default
+        cy.get('li').contains('Admin').click();
+        //Confirm Edit
+        cy.get('button').contains("Edit").click()
+
         //Logout
         cy.Logout()
         })
@@ -36,17 +67,19 @@ describe("Scenario: Verify invite collaborator feature	", () => {
         cy.get("table thead tr th").contains("Email").should('exist')
         
         //Add a testemail
-        cy.get(".css-1p02q7g").should('exist').click()
+        cy.get("button").contains('Invite').click()
         cy.get('#newUserEmail').click().type('testEmail@gmail.com')
-        cy.xpath("(//button[contains(@class,'MuiButtonBase-root MuiButton-root')])[3]").click()
-       
+        cy.get('form div button').contains('Invite').click()
+
         //Locate a collaborator in the list.
         cy.get("tbody").within(() => {
-          cy.get('tr').eq(0).find('td').eq(0).should('contain', 'testEmail@gmail.com');
+          cy.get('tr').eq(2).find('td').eq(0).should('contain', 'testEmail@gmail.com');
         });	
 
         //Click the edit button associated with the collaborator.	
-        cy.xpath("(//div[@class='MuiBox-root css-17hckkm']//button)[1]").click()
+        cy.get('table tbody tr').eq(2) // Select the 2nd row (index 1)
+        .find('td').eq(2).find('button').click(); // Click the edit button in the 3rd column
+        cy.get('button').contains('Edit').should('exist')
 
         //Verify that a modal titled "Edit user role" appears.	
         cy.get("div").contains("Edit user role").should('exist')
@@ -54,25 +87,25 @@ describe("Scenario: Verify invite collaborator feature	", () => {
         //Verify that the modal contains a selection box with options: USER, ADMIN, OWNER.	
         cy.get("#edit-user-select").click()
 
-        cy.get('.css-r8u8y9').within(() => {
-          // Use the cy.get() command to select the list items and check their presence
+        cy.get('ul[aria-labelledby="edit-user-select-label"]').within(() => {
           cy.get('li').should($listItems => {
             // Get the text content of the list items
             const listItemTexts = $listItems.map((_, el) => Cypress.$(el).text()).get();
         
             // Check the presence of specific items
-            expect(listItemTexts).to.include('OWNER');
-            expect(listItemTexts).to.include('ADMIN');
-            expect(listItemTexts).to.include('USER');
+            expect(listItemTexts).to.include('Owner');
+            expect(listItemTexts).to.include('Admin');
+            expect(listItemTexts).to.include('User');
           });
         });
         
         //Click a different role than the default
-        cy.get('.css-r8u8y9 li').contains('ADMIN').click();
-        cy.get(".css-1jhao0x").contains("Edit").click()
+        cy.get('li').contains('Admin').click();
+        cy.get('button').contains("Edit").click()
         //Verify updated role
         cy.get('tbody').within(() => {
-          cy.get('tr').eq(0).find('td').eq(1).should('contain', 'ADMIN');
+          cy.get('tr').eq(2).find('td').eq(1).should('contain', 'ADMIN');
         });
+        cy.wait(2000)
     })
 })

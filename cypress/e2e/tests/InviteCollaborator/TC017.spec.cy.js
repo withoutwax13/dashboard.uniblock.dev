@@ -10,7 +10,7 @@ describe("Scenario: Verify invite collaborator feature	", () => {
             cy.get("input[name='email']").type('+3.1@gmail.com')
             LoginPageObject.setPassword(data.LoginPage.validCredentials.password)
             LoginPageObject.clickLoginButton();
-            
+            cy.title().should('eq', 'Projects: List | Uniblock Dashboard').should('not.eq', data.LoginPage.title)
         })
     })
     afterEach(()=>{
@@ -34,10 +34,15 @@ describe("Scenario: Verify invite collaborator feature	", () => {
         cy.get("table thead tr th").contains("Email").should('exist')
         
         //Check the Invite button.
-        cy.get(".css-1p02q7g").should('exist').and('be.enabled')
+        cy.get("button").contains('Invite').should('exist').and('be.enabled')
 
-        //Check the delete and edit button if disavled
-        cy.get(".css-10ygcul").should('exist').and('be.enabled')
+        //Click the edit button associated and should be disabled	
+        cy.get('table tbody tr').eq(0) // Select the 1st row (index 1)
+        .find('td').eq(2).find('button').should('exist').and('be.enabled') 
+
+        //Click the delete button associated and should be disabled	
+        cy.get('table tbody tr').eq(0) // Select the 1st row (index 1)
+        .find('td').eq(3).find('button').should('exist').and('be.enabled') 
 
     })
 })

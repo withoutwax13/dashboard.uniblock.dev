@@ -10,7 +10,7 @@ describe("Scenario: Verify invite collaborator feature	", () => {
             cy.get("input[name='email']").type('+3@gmail.com')
             LoginPageObject.setPassword(data.LoginPage.validCredentials.password)
             LoginPageObject.clickLoginButton();
-            
+            cy.title().should('eq', 'Projects: List | Uniblock Dashboard').should('not.eq', data.LoginPage.title)
         })
     })
     afterEach(()=>{
@@ -34,7 +34,7 @@ describe("Scenario: Verify invite collaborator feature	", () => {
         cy.get("table thead tr th").contains("Email").should('exist')
         
         //Click the Invite button.
-        cy.get(".css-1p02q7g").should('exist').click()
+        cy.get("button").contains('Invite').should('exist').click()
 
         //Verify that a modal titled "Invite user" appears.	
         cy.get("div").contains('Invite user').should('exist')
@@ -43,14 +43,15 @@ describe("Scenario: Verify invite collaborator feature	", () => {
         cy.get('#newUserEmail').should('exist')
 
         //Verify that the modal contains a close button and an invite button.	
-        cy.get(".css-z4rakn").should('exist')
+        cy.get("form div button").contains('Close').should('exist')
+        cy.get("form div button").contains('Invite').should('exist')
 
         //------------------------------//
         //Input the email address of collaboratorTestEmail[0] into the input field.	
         cy.get('#newUserEmail').click().type('paul.example.com')
 
         //Click the invite button.
-        cy.xpath("(//button[contains(@class,'MuiButtonBase-root MuiButton-root')])[3]").click()
+        cy.get("form div button").contains('Invite').click()
 
         //Verify that the modal displays an error matching the errorMessage	
         cy.get("div").contains("must be a valid email").should('be.visible')
@@ -61,7 +62,7 @@ describe("Scenario: Verify invite collaborator feature	", () => {
         cy.get('#newUserEmail').click().type('paul@.com')
 
         //Click the invite button.
-        cy.xpath("(//button[contains(@class,'MuiButtonBase-root MuiButton-root')])[3]").click()
+        cy.get("form div button").contains('Invite').click()
 
          //Verify that the modal displays an error matching the errorMessage	
         cy.get("div").contains("must be a valid email").should('be.visible')
@@ -72,12 +73,12 @@ describe("Scenario: Verify invite collaborator feature	", () => {
         cy.get('#newUserEmail').click().type('paul@example')
 
         //Click the invite button.
-        cy.xpath("(//button[contains(@class,'MuiButtonBase-root MuiButton-root')])[3]").click()
+        cy.get("form div button").contains('Invite').click()
 
          //Verify that the modal displays an error matching the errorMessage	
         cy.get("div").contains("must be a valid email").should('be.visible')
 
         //Click close
-        cy.get(".css-z4rakn").click()
+        cy.get("button").contains('Close').click()
     })
 })

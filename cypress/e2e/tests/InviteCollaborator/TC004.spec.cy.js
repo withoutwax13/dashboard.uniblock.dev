@@ -10,7 +10,7 @@ describe("Scenario: Verify invite collaborator feature	", () => {
             cy.get("input[name='email']").type('+3@gmail.com')
             LoginPageObject.setPassword(data.LoginPage.validCredentials.password)
             LoginPageObject.clickLoginButton();
-            
+            cy.title().should('eq', 'Projects: List | Uniblock Dashboard').should('not.eq', data.LoginPage.title)
         })
     })
     afterEach(()=>{
@@ -34,7 +34,7 @@ describe("Scenario: Verify invite collaborator feature	", () => {
         cy.get("table thead tr th").contains("Email").should('exist')
         
         //Click the Invite button.
-        cy.get(".css-1p02q7g").should('exist').click()
+        cy.get("button").contains('Invite').should('exist').click()
 
         //Verify that a modal titled "Invite user" appears.	
         cy.get("div").contains('Invite user').should('exist')
@@ -43,13 +43,15 @@ describe("Scenario: Verify invite collaborator feature	", () => {
         cy.get('#newUserEmail').should('exist')
 
         //Verify that the modal contains a close button and an invite button.	
-        cy.get(".css-z4rakn").should('exist')
+        //Verify that the modal contains a close button and an invite button.	
+        cy.get("form div button").contains('Close').should('exist')
+        cy.get("form div button").contains('Invite').should('exist')
 
         //Input the email address of collaboratorTestEmail into the input field.
         cy.get('#newUserEmail').click().type('testEmail@gmail.com')
 
         //Click the close button.
-        cy.get(".css-z4rakn").should('exist').click()
+        cy.get("button").contains('Close').click()
 
         //Verify that the modal disappears.
         cy.get("div").contains('Invite user').should('not.exist')

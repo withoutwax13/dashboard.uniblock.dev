@@ -10,13 +10,19 @@ describe("Scenario: Verify invite collaborator feature	", () => {
             cy.get("input[name='email']").type('+3@gmail.com')
             LoginPageObject.setPassword(data.LoginPage.validCredentials.password)
             LoginPageObject.clickLoginButton();
-            
+            cy.title().should('eq', 'Projects: List | Uniblock Dashboard').should('not.eq', data.LoginPage.title)
         })
     })
     afterEach(()=>{
         // Post-Condition: delete added testuser
-        cy.xpath("(//div[@class='MuiBox-root css-17hckkm']//button)[2]").click()
-        cy.get('.css-1jhao0x').click()
+        cy.get('table tbody tr').eq(1) // Select the 2nd row (index 1)
+        .find('td').eq(3).find('button').click(); // Click the delete button in the 4th column
+        cy.get('button').contains('Delete').click()
+        //Invite the NON-OWNER account for Test Case 08 to use
+        //Click the Invite button.
+        cy.get("button").contains('Invite').click()
+        cy.get('#newUserEmail').click().type('renzdesierra08+3.2@gmail.com')
+        cy.get('form div button').contains('Invite').click()
         //Logout
         cy.Logout()
         })
@@ -36,7 +42,7 @@ describe("Scenario: Verify invite collaborator feature	", () => {
         cy.get("table thead tr th").contains("Email").should('exist')
         
         //Click the Invite button.
-        cy.get(".css-1p02q7g").should('exist').click()
+        cy.get("button").contains('Invite').should('exist').click()
 
         //Verify that a modal titled "Invite user" appears.	
         cy.get("div").contains('Invite user').should('exist')
@@ -45,35 +51,35 @@ describe("Scenario: Verify invite collaborator feature	", () => {
         cy.get('#newUserEmail').should('exist')
 
         //Verify that the modal contains a close button and an invite button.	
-        cy.get(".css-z4rakn").should('exist')
+        cy.get("form div button").contains('Close').should('exist')
+        cy.get("form div button").contains('Invite').should('exist')
 
         //Input the email address of collaboratorTestEmail into the input field.
         cy.get('#newUserEmail').click().type('testEmail@gmail.com')
 
         //Click the invite button.
-        cy.xpath("(//button[contains(@class,'MuiButtonBase-root MuiButton-root')])[3]").click()
+        cy.get('form div button').contains('Invite').click()
 
         //Verify that the modal disappears.
         cy.get("div").contains('Invite user').should('not.exist')
 
         //Verify that the email of collaboratorTestEmail is in the collaborator list component, with the role of a user.
         cy.get("tbody").within(() => {
-            cy.get('tr').eq(0).find('td').eq(0).should('contain', 'testEmail@gmail.com');
+            cy.get('tr').eq(1).find('td').eq(0).should('contain', 'testEmail@gmail.com');
           });
         
         //Click the Invite button.
-        cy.get(".css-1p02q7g").should('exist').click()
+        cy.get("button").contains('Invite').should('exist').click()
         cy.get('#newUserEmail').click().type('testEmail@gmail.com')
 
         //Click the invite button.
-        cy.xpath("(//button[contains(@class,'MuiButtonBase-root MuiButton-root')])[3]").click()
+        cy.get('form div button').contains('Invite').click()
 
         //Verify that the modal disappears.
         cy.get("div").contains('Invite user').should('not.exist')
 
           cy.get('tbody').within(() => {
-            // Use the cy.get() command to select the rows and check their length
-            cy.get('tr').should('have.length', 5); //+1 for the default row
+            cy.get('tr').should('have.length', 3); //+1 for the default row
           });
     })
 })

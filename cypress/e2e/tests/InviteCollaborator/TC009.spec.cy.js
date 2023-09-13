@@ -10,7 +10,7 @@ describe("Scenario: Verify invite collaborator feature	", () => {
             cy.get("input[name='email']").type('+3@gmail.com')
             LoginPageObject.setPassword(data.LoginPage.validCredentials.password)
             LoginPageObject.clickLoginButton();
-            
+            cy.title().should('eq', 'Projects: List | Uniblock Dashboard').should('not.eq', data.LoginPage.title)
         })
     })
     afterEach(()=>{
@@ -34,7 +34,7 @@ describe("Scenario: Verify invite collaborator feature	", () => {
         cy.get("table thead tr th").contains("Email").should('exist')
         
         //Click the Invite button.
-        cy.get(".css-1p02q7g").should('exist').and('be.enabled')
+        cy.get("button").contains('Invite').should('exist').and('be.enabled')
 
     })
 })
