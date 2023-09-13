@@ -17,11 +17,11 @@ describe("Scenario: Verify adding new project item feature", () => {
         // Post-Condition: Delete projects then Logout
         cy.get('div').contains('testData').click()
         cy.wait(500)
-        cy.get('.css-wvtjil').contains('Delete').click()
+        cy.get('div span').contains('Delete project').click()
         cy.wait(500)
         cy.get('#confirmProjectName').type('testData')
         cy.wait(500)
-        cy.get('.MuiDialogActions-root > .MuiButton-contained').click()
+        cy.get('button').contains('Delete').click()
         cy.Logout()
         })
     
@@ -40,7 +40,7 @@ describe("Scenario: Verify adding new project item feature", () => {
         cy.get('button').contains('Create').click()
         
         //Check if modal disappears
-        cy.get('div').contains('New project').should('not.be.visible')
+        cy.get('div[role="dialog"]').should('not.exist')
 
         //Input projectName in the search input field	
         cy.get('input[placeholder="Search..."').type('testData')

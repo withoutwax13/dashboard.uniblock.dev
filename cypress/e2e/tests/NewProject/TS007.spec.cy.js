@@ -17,11 +17,11 @@ describe("Scenario: Verify adding new project item feature", () => {
         // Post-Condition: Delete projects then Logout
         cy.get('div').contains('testData').click()
         cy.wait(500)
-        cy.get('.css-wvtjil').contains('Delete').click()
+        cy.get('div span').contains('Delete project').click()
         cy.wait(500)
         cy.get('#confirmProjectName').type('testData')
         cy.wait(500)
-        cy.get('.MuiDialogActions-root > .MuiButton-contained').click()
+        cy.get('button').contains('Delete').click()
         cy.Logout()
         })
     
