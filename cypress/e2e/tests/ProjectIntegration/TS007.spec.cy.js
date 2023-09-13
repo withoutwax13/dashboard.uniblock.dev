@@ -10,12 +10,12 @@ describe("Scenario: Verify project integration page	", () => {
             cy.get("input[name='email']").type('+4@gmail.com')
             LoginPageObject.setPassword(data.LoginPage.validCredentials.password)
             LoginPageObject.clickLoginButton();
-            //cy.title().should('eq', 'Get Started | Uniblock Dashboard').should('not.eq', data.LoginPage.title)
+            cy.title().should('eq', 'Projects: List | Uniblock Dashboard').should('not.eq', data.LoginPage.title)
         })
     })
     afterEach(()=>{
         // Post-Condition: Delete the Integration then Logout
-        cy.get('.css-1035b08 ul li').should('contain', 'Delete key').click();
+        cy.get('div').contains('Delete key').click();
         cy.wait(1000)
         cy.Logout()
         })
@@ -26,15 +26,16 @@ describe("Scenario: Verify project integration page	", () => {
         cy.get('div').contains('newProject').click()
     
         //Click the Integrations button
-        cy.get(".css-1p02q7g").contains('Integrations').should('be.enabled').click()
+        cy.get("button").contains('Integrations').should('be.enabled').click()
         
         //Click the burger menu on the integration item.
-        cy.contains('.css-1fkeqk1', 'Moralis').should('exist').within(() => {
-            cy.get('.css-1gwtl1m').click();
+        let IntegrationCard = ".css-1fkeqk1"
+        cy.contains(`${IntegrationCard}`, 'Moralis').should('exist').within(() => {
+            cy.get('#menu-button').click();
            
           });
           //Verify that the burger menu now replaces the add button, and it includes the "Delete API key" option.
-          cy.get('.css-1035b08 ul li').should('contain', 'Delete key').and('be.visible');
+          cy.get('div ul li').should('contain', 'Delete key').and('be.visible');
         
         
     })

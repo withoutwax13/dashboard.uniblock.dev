@@ -10,7 +10,7 @@ describe("Scenario: Verify project integration page	", () => {
             cy.get("input[name='email']").type('+4@gmail.com')
             LoginPageObject.setPassword(data.LoginPage.validCredentials.password)
             LoginPageObject.clickLoginButton();
-            //cy.title().should('eq', 'Get Started | Uniblock Dashboard').should('not.eq', data.LoginPage.title)
+            cy.title().should('eq', 'Projects: List | Uniblock Dashboard').should('not.eq', data.LoginPage.title)
         })
     })
     afterEach(()=>{
@@ -24,12 +24,15 @@ describe("Scenario: Verify project integration page	", () => {
         cy.get('div').contains('newProject').click()
     
         //Click the Integrations button
-        cy.get(".css-1p02q7g").contains('Integrations').should('be.enabled').click()
+        cy.get("button").contains('Integrations').should('be.enabled').click()
         
-        //Click the burger menu on the integration item.
+        //Locate an integration with coming soon
         cy.contains('.css-crt53z', 'BinanceAPI').should('exist').within(() => {
-            cy.get('.css-1gwtl1m').should('be.disabled');
-            cy.get('.css-z4rakn').should('be.disabled');
+            //Check that the add and dropdown button menu is disabled.
+            let addButton = ".css-1gwtl1m"
+            let dropdownButton = ".css-z4rakn"
+            cy.get(`${addButton}`).should('be.disabled');
+            cy.get(`${dropdownButton}`).should('be.disabled');
           });
         
     })

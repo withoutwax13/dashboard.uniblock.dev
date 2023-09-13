@@ -10,7 +10,7 @@ describe("Scenario: Verify project integration page	", () => {
             cy.get("input[name='email']").type('+4@gmail.com')
             LoginPageObject.setPassword(data.LoginPage.validCredentials.password)
             LoginPageObject.clickLoginButton();
-            //cy.title().should('eq', 'Get Started | Uniblock Dashboard').should('not.eq', data.LoginPage.title)
+            cy.title().should('eq', 'Projects: List | Uniblock Dashboard').should('not.eq', data.LoginPage.title)
         })
     })
     afterEach(()=>{
@@ -24,18 +24,19 @@ describe("Scenario: Verify project integration page	", () => {
         cy.get('div').contains('newProject').click()
     
         //Click the Integrations button
-        cy.get(".css-1p02q7g").contains('Integrations').should('be.enabled').click()
+        cy.get("button").contains('Integrations').should('be.enabled').click()
         
         //Click the add button on an integration item.
-        cy.contains('.css-1fkeqk1', 'Moralis').should('exist').within(() => {
-            cy.get('.css-1gwtl1m').click();
-          });
+        let IntegrationCards = ".css-1fkeqk1"
+        cy.contains(`${IntegrationCards}`, 'Moralis').should('exist').within(() => {
+            cy.get('button[aria-label="add key"]').click();
+        });
 
         //Verify that the modal appears with input boxes for Name and Key, and close and create buttons.
-        cy.get('.css-4hwg00').should('exist')
+        cy.get('div h2').contains('Configure Moralis').should('exist')
         
         //Click create
-        cy.get('.css-1p02q7g').click()
+        cy.get('button').contains('Create').click()
 
         //Verify error message
         cy.get('div').contains("name is a required field").should('exist').and('be.visible')

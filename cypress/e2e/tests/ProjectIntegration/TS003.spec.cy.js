@@ -10,7 +10,7 @@ describe("Scenario: Verify project integration page	", () => {
             cy.get("input[name='email']").type('+4@gmail.com')
             LoginPageObject.setPassword(data.LoginPage.validCredentials.password)
             LoginPageObject.clickLoginButton();
-            //cy.title().should('eq', 'Get Started | Uniblock Dashboard').should('not.eq', data.LoginPage.title)
+            cy.title().should('eq', 'Projects: List | Uniblock Dashboard').should('not.eq', data.LoginPage.title)
         })
     })
     afterEach(()=>{
@@ -27,10 +27,10 @@ describe("Scenario: Verify project integration page	", () => {
         cy.url().should('include', 'dashboard/projects/overview')
 
         //Locate View Integrations section.
-        cy.get(".css-1p02q7g").contains('Integrations').should('exist').and('be.visible')
+        cy.get('div p').contains('View Integrations').should('exist').and('be.visible')
 
         //Click the Integrations button
-        cy.get(".css-1p02q7g").contains('Integrations').should('be.enabled').click()
+        cy.get('button').contains('Integrations').should('be.enabled').click()
         
         //Check the url
         cy.url().should('include', '/projects/integrations/')
