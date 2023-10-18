@@ -34,7 +34,7 @@ describe("Scenario: Verify adding project API key feature", () => {
         cy.get("table thead th").contains("Key").should('exist')	
 
         //Verify the total number of API Keys in the list and store the value as totalAPI.
-        cy.get('.css-1xnox0e').within(() => {
+        cy.get('table tbody').within(() => {
             cy.get('tr').should('have.length', 2); //+1 for menu on the bottom
           });
 
@@ -42,7 +42,7 @@ describe("Scenario: Verify adding project API key feature", () => {
         cy.get("div").contains("New API Key").should('exist').click()
 
         //Verify the total number of API Keys in the list is totalAPI + 1.	
-        cy.get('.css-1xnox0e').within(() => {
+        cy.get('table tbody').within(() => {
             cy.get('tr').should('have.length', 3); //+1 for menu on the bottom
           });
     })
