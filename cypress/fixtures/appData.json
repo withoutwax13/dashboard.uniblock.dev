@@ -3,8 +3,8 @@
         "url" : "https://dashboard-test.uniblock.dev/auth/login",
         "title": "Login | Uniblock Dashboard",
         "validCredentials": {
-            "email": "renzdesierra08",
-            "password": "Desierrafamily0"
+            "email": "valerasoftwares+1st.account",
+            "password": "Password#123"
         }
     },
     "Dashboard": {
@@ -17,8 +17,14 @@
         "loginurl" : "https://dashboard-test.uniblock.dev/auth/login",
         "title": "Register | Uniblock Dashboard",
         "validCredentials":{
-            "email": "renzdesierra08",
-            "password": "Desierrafamily0"
+            "email": "valerasoftwares+1st.account",
+            "password": "Password#123"
+        }
+    },
+    "NewAccount":{
+        "validCredentials": {
+            "email": "joemawmu",
+            "password": "Password123#"
         }
     }
 }

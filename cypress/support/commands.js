@@ -29,6 +29,7 @@
 
 
 Cypress.Commands.add("Logout", ()=>{
-    cy.get('div button img[class="MuiAvatar-img css-1hy9t21"]').click()
+    let logoutButton = ".css-w5qhhs";
+    cy.get(logoutButton).click()
     cy.get('div li').contains('Logout').click()
 })
